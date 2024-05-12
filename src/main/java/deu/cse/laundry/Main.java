@@ -10,11 +10,13 @@ package deu.cse.laundry;
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // WashingMachine 인스턴스를 얻습니다.
+        WashingMachine washingMachine1 = WashingMachine.getInstance();
+        WashingMachine washingMachine2 = WashingMachine.getInstance();
+
+        // 두 인스턴스가 동일한지 확인하여 싱글톤 패턴이 올바르게 작동하는지 검증합니다.
+        System.out.println(washingMachine1 == washingMachine2); // true가 출력되어야 합니다.
     }
-    
 }
+
