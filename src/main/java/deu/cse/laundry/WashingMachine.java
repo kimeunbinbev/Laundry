@@ -24,9 +24,4 @@ public class WashingMachine {
         }
         return instance;
     }
-
-    // 세탁 기능을 시뮬레이션하는 메소드입니다.
-    public void wash(String clothes) {
-        System.out.println(clothes + "를 세탁합니다.");
-    }
 }
