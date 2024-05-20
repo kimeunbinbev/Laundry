@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
  *
  * @author hesed
  */
-
 public class NewFrameMain extends javax.swing.JFrame {
     // loginFacade, 로그인 기능을 수행하는 객체
     private LoginFacade loginFacade;
