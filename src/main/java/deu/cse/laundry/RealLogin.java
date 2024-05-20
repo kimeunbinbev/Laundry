@@ -25,7 +25,6 @@ public class RealLogin implements Login{
             JOptionPane.showMessageDialog(null, "로그인 성공, 관리자님 환영합니다.", "안내", JOptionPane.INFORMATION_MESSAGE);
             Administrator adminFrame = new Administrator();
             adminFrame.setVisible(true);
-            
             return true;
         } else if (ID.equals(UserID) && Password.equals(UserPassword)) {
             JOptionPane.showMessageDialog(null, "로그인 성공, " + UserID + "님 세탁방에 오신 것을 환영합니다.", "안내", JOptionPane.INFORMATION_MESSAGE);

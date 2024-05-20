@@ -4,7 +4,6 @@ public class Storage {
     // Hash table
     private LinkedList<Slot>[] hashTable;
     public LinkedList<Slot> list;
-
     // Hash 객체를 생성할 때 table 사이즈 지정
     public Storage(int size) {
         this.hashTable = new LinkedList[size]; // LinkedList 배열로 초기화

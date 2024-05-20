@@ -33,7 +33,6 @@ public class Payment extends javax.swing.JFrame {
     public interface PaymentCommand {
         void execute();
     }
-
     // 현금 결제
     public class CashPaymentCommand implements PaymentCommand {
         private PaymentProcessor processor;

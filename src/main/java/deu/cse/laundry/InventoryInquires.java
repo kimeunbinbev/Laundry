@@ -183,9 +183,9 @@ public class InventoryInquires extends javax.swing.JFrame {
         javax.swing.DefaultListModel<String> model = new javax.swing.DefaultListModel<>();
         String[] inquiries = {"생각보다 비싸요", "향기가 맘에 안들어요", "IC카드 리더기가 먹통이에요"};
         for (String inquire : inquiries) {
-            model.addElement(inquire); // 문의사항을 리스트에 추가
+            model.addElement(inquire); 
         }
-        jList2.setModel(model); // 리스트 모델 업데이트
+        jList2.setModel(model);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
@@ -198,13 +198,13 @@ public class InventoryInquires extends javax.swing.JFrame {
         int currentNum = Integer.parseInt(list.getModel().getElementAt(i));
         int updatedNum;
         if (isRandom) {
-            updatedNum = currentNum - rand.nextInt(5) + 1; // 현재 숫자에 -1 ~ -5 랜덤 숫자를 더함
+            updatedNum = currentNum - rand.nextInt(5) + 1; 
         } else {
-            updatedNum = currentNum + 50; // 현재 숫자에 50을 더함
+            updatedNum = currentNum + 50; 
         }
-        model.addElement(Integer.toString(updatedNum)); // 업데이트된 숫자를 리스트에 추가
+        model.addElement(Integer.toString(updatedNum)); 
     }
-    list.setModel(model); // 리스트 모델 업데이트
+    list.setModel(model);
 }
     /**
      * @param args the command line arguments
