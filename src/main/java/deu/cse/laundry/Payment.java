@@ -45,7 +45,6 @@ public class Payment extends javax.swing.JFrame {
             processor.processCashPayment();
         }
     }
-
     // 신용카드 결제
     public class CreditCardPaymentCommand implements PaymentCommand {
         private PaymentProcessor processor;

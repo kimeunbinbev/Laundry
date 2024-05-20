@@ -31,7 +31,6 @@ public class RealLogin implements Login{
             JOptionPane.showMessageDialog(null, "로그인 성공, " + UserID + "님 세탁방에 오신 것을 환영합니다.", "안내", JOptionPane.INFORMATION_MESSAGE);
             Customer customerFrame = new Customer();
             customerFrame.setVisible(true);
-            
             return true;
         } else {
             loginFail++;
