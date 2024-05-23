@@ -9,11 +9,12 @@ public class LaundryApp extends JFrame {
     private JButton extraLargeButton;
     private JButton largeButton1;
     private JButton largeButton2;
+    private JButton backButton; // Added back button
     private int laundryWeight; // Added to store the laundry weight
 
     public LaundryApp() {
         setTitle("셀프 세탁방");
-        setSize(300, 200);
+        setSize(300, 300); // Adjusted size to accommodate the back button
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -29,6 +30,9 @@ public class LaundryApp extends JFrame {
 
         largeButton2 = new JButton("대형 세탁기(26kg)-2");
         largeButton2.setPreferredSize(buttonSize);
+
+        backButton = new JButton("Back"); // Initializing the back button
+        backButton.setPreferredSize(buttonSize); // Setting the size
 
         extraLargeButton.addActionListener(new ActionListener() {
             @Override
@@ -51,9 +55,17 @@ public class LaundryApp extends JFrame {
             }
         });
 
+        backButton.addActionListener(new ActionListener() { // Adding action listener for the back button
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Closing the current window
+            }
+        });
+
         add(extraLargeButton);
         add(largeButton1);
         add(largeButton2);
+        add(backButton); // Adding the back button to the frame
     }
 
     private void openWashOptionsDialog(int maxWeight) {
@@ -106,14 +118,18 @@ public class LaundryApp extends JFrame {
         standardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 openWashOptionsDialog(new StandardWashStrategy());
+
             }
+
         });
 
         expressButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openWashOptionsDialog(new ExpressWashStrategy());
+
             }
         });
 
@@ -121,6 +137,7 @@ public class LaundryApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openWashOptionsDialog(new CleanWashStrategy());
+
             }
         });
 
@@ -132,11 +149,12 @@ public class LaundryApp extends JFrame {
     }
 
     private void showDryerAndExitDialog() {
+
         JPanel panel = new JPanel(new GridLayout(4, 1));
         JButton extraLargeDryerButton = new JButton("초대형 건조기(30kg)");
         JButton largeDryerButton1 = new JButton("대형 건조기(26kg)-1");
         JButton largeDryerButton2 = new JButton("대형 건조기(26kg)-2");
-        JButton exitButton = new JButton("끝내기");
+        JButton backButton = new JButton("뒤로 가기");
 
         // Enable/Disable buttons based on the laundry weight
         extraLargeDryerButton.setEnabled(laundryWeight <= 30);
@@ -147,7 +165,9 @@ public class LaundryApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Code to operate the extra large dryer
+                dispose(); // 창 닫기
                 showDryerTimeDialog(30); // 버튼 생성 메서드 호출
+
             }
         });
 
@@ -155,7 +175,9 @@ public class LaundryApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Code to operate the first large dryer
+                dispose(); // 창 닫기
                 showDryerTimeDialog(26); // 버튼 생성 메서드 호출
+
             }
         });
 
@@ -163,21 +185,23 @@ public class LaundryApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Code to operate the second large dryer
+                dispose(); // 창 닫기
                 showDryerTimeDialog(26); // 버튼 생성 메서드 호출
+
             }
         });
 
-        exitButton.addActionListener(new ActionListener() {
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                dispose();
             }
         });
 
         panel.add(extraLargeDryerButton);
         panel.add(largeDryerButton1);
         panel.add(largeDryerButton2);
-        panel.add(exitButton);
+        panel.add(backButton);
 
         JOptionPane.showOptionDialog(this, panel, "건조기 옵션", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{}, null);
     }
@@ -187,7 +211,7 @@ public class LaundryApp extends JFrame {
         JButton button1 = new JButton("16분");
         JButton button2 = new JButton("20분");
         JButton button3 = new JButton("32분");
-        JButton button4 = new JButton("끝내기");
+        JButton backButton = new JButton("결제하러 가기");
 
         button1.addActionListener(new ActionListener() {
             @Override
@@ -195,6 +219,7 @@ public class LaundryApp extends JFrame {
                 DryerStrategy strategy = new Dryer16MinutesStrategy();
                 strategy.dry();
                 JOptionPane.showMessageDialog(LaundryApp.this, "건조 완료!", "완료", JOptionPane.INFORMATION_MESSAGE);
+
             }
         });
 
@@ -217,17 +242,17 @@ public class LaundryApp extends JFrame {
             }
         });
 
-        button4.addActionListener(new ActionListener() {
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                dispose(); // 창 닫기
             }
         });
 
         panel.add(button1);
         panel.add(button2);
         panel.add(button3);
-        panel.add(button4);
+        panel.add(backButton);
 
         JOptionPane.showOptionDialog(this, panel, "건조 시간 선택", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{}, null);
     }
