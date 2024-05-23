@@ -1,8 +1,6 @@
 package deu.cse.laundry;
 
-import javax.swing.DefaultListModel;
 public class WashingMachineManagement extends javax.swing.JFrame {
-    private DefaultListModel<String> listModel;
     public WashingMachineManagement() {
         initComponents();
     }
