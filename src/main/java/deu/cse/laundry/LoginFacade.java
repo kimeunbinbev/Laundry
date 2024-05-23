@@ -13,20 +13,30 @@ import javax.swing.JOptionPane;
 // 퍼사드 패턴을 적용한 클래스
 public class LoginFacade {
     // realLogin, 실제 로그인 기능을 수행하는 객체
-    private Login realLogin;
-    
-     // LoginFacade 생성자에서 realLogin 객체를 초기화
-    public LoginFacade() {
-        this.realLogin = new RealLogin();
+    private LoginCheck check;
+    private Message message;
+    private Failcount failcount;
+    private FrameOpen fopen;
+    private NewFrameMain frame;
+     // 각 생성자에서 필요한 객체를 초기화
+    public LoginFacade(NewFrameMain frame) {
+        this.frame = frame;
+        this.check = new LoginCheck();
+        this.message = new Message();
+        this.failcount = new Failcount();
+        this.fopen = new FrameOpen(frame);
     }
     
     // login 함수, ID와 비밀번호를 받아 realLogin 객체의 login 함수를 호출, 결과 반환
-    public boolean login(String ID, String Password) {
-        return realLogin.login(ID, Password);
-    }
     // exitstart 함수, 로그아웃 메시지 출력 후 종료
     public void exitstart(){
         JOptionPane.showMessageDialog(null, "시스템을 종료합니다.", "안내", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
+    }
+    public void start(String ID, String Password){
+        int LoginResult = check.login(ID, Password);
+        failcount.Fail5(LoginResult);
+        message.printMessage(LoginResult);
+        fopen.Open(LoginResult);
     }
 }

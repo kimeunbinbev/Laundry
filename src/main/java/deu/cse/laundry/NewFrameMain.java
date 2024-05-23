@@ -13,7 +13,7 @@ public class NewFrameMain extends javax.swing.JFrame {
     // NewFrameMain 생성자에서 loginFacade 객체를 초기화하고 컴포넌트를 초기화
     public NewFrameMain() {
         initComponents();
-        loginFacade = new LoginFacade();
+        loginFacade = new LoginFacade(this);
     }
 
     /**
@@ -119,11 +119,7 @@ public class NewFrameMain extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String ID = jTextField1.getText();
         String Password = jTextField2.getText();
-        if (loginFacade.login(ID, Password)) {
-        // loginFacade의 login 함수를 호출해 로그인을 시도
-        // 로그인 성공 시 현재 프레임을 닫는다..
-        this.dispose();
-        }
+        loginFacade.start(ID, Password);
     }//GEN-LAST:event_jButton1ActionPerformed
     
     // jButton2ActionPerformed 함수는 로그인 버튼이 클릭 시 호출
