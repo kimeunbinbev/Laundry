@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package deu.cse.laundry;
+
+import java.util.Random;
+
 /**
  *
  * @author hesed
@@ -181,9 +184,14 @@ public class InventoryInquires extends javax.swing.JFrame {
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         javax.swing.DefaultListModel<String> model = new javax.swing.DefaultListModel<>();
-        String[] inquiries = {"생각보다 비싸요", "향기가 맘에 안들어요", "IC카드 리더기가 먹통이에요"};
-        for (String inquire : inquiries) {
-            model.addElement(inquire); 
+        String[] inquiries = {"생각보다 비싸요", "향기가 맘에 안들어요", "IC카드 리더기가 먹통이에요", "세탁이 제대로 된것 같지 않아요",
+        "여전히 축축해요","세탁물에 지갑이 들어갔는데 안보여요",
+        "시간이 너무 걸려요","옷이 바뀌었어요","고양이 털이 그대로에요","얼룩이 그대로에요"};
+        
+        Random rand = new Random();
+        for (int i = 0; i < 3; i++) {
+            int random = rand.nextInt(inquiries.length); // 0부터 inquiries.length-1까지의 랜덤한 인덱스 생성
+            model.addElement(inquiries[random]); // 무작위로 선택된 요소 추가
         }
         jList2.setModel(model);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
