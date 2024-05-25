@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
  */
     //실제 로그인이 진행되는 함수
 public class LoginCheck{
-    private int loginFail = 0;
     private String UserID = "user";
     private String UserPassword = "password";
     private String AdminiStratorID = "admin";
