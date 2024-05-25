@@ -1,11 +1,17 @@
 package deu.cse.laundry;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
 
 public class WashingMachineManagement extends javax.swing.JFrame {
     private boolean[] faultStatus = {false, false, false}; // 각 세탁기의 고장 상태를 나타내는 배열
+    
+    private Command backCommand;
+    private Command faultReportCommand1;
+    private Command faultReportCommand2;
+    private Command faultReportCommand3;
+    private Command asCompleteCommand;
+    
     public WashingMachineManagement() {
         initComponents();
     }
@@ -164,12 +170,29 @@ public class WashingMachineManagement extends javax.swing.JFrame {
         // A/S 완료 다이얼로그를 띄웁니다.
         new ASCompleteDialog(this).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+    public void reportFault(int machineIndex) {
+        if (faultStatus[machineIndex]) {
+            new AlreadyFaultyDialog(this).setVisible(true);
+        } else {
+            new FaultConfirmationDialog(this, machineIndex + 1).setVisible(true);
+            faultStatus[machineIndex] = true;
+        }
+    }
+
+    public void completeAS() {
+        for (int i = 0; i < faultStatus.length; i++) {
+            faultStatus[i] = false;
+        }
+
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        jRadioButton3.setSelected(false);
+
+        new ASCompleteDialog(this).setVisible(true);
+    }
+
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WashingMachineManagement().setVisible(true);
-            }
-        });
+       java.awt.EventQueue.invokeLater(() -> new WashingMachineManagement().setVisible(true));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -179,4 +202,5 @@ public class WashingMachineManagement extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     // End of variables declaration//GEN-END:variables
+
 }

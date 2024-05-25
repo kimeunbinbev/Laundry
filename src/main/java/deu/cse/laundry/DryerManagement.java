@@ -1,9 +1,12 @@
 package deu.cse.laundry;
 
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+
 public class DryerManagement extends javax.swing.JFrame {
 
     
-   public DryerManagement() {
+    public DryerManagement() {
         initComponents();
    
     }
