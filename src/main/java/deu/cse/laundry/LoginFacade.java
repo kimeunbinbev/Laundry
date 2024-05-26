@@ -35,8 +35,8 @@ public class LoginFacade {
     }
     public void start(String ID, String Password){
         int LoginResult = check.login(ID, Password);
-        failcount.Fail5(LoginResult);
-        message.printMessage(LoginResult);
+        int failnum = failcount.Fail5(LoginResult);
+        message.printMessage(LoginResult, failnum);
         fopen.Open(LoginResult);
     }
 }

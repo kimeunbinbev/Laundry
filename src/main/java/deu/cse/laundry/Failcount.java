@@ -11,18 +11,14 @@ import javax.swing.JOptionPane;
  * @author hesed
  */
 public class Failcount {
-    private int failcount = 0;
+        private int failcount = 0;
 
-    public void Fail5(int number) {
+        public int Fail5(int number) {
         if(number != 3){
-            return;
+            return failcount;
         }
         failcount++;
-        JOptionPane.showMessageDialog(null, failcount + "번 틀렸습니다. 5번 이상 틀릴시 강제 종료됩니다.", "경고", JOptionPane.INFORMATION_MESSAGE);
-        if(failcount >= 5){
-            JOptionPane.showMessageDialog(null, "5번 틀렸습니다. 시스템을 종료합니다.", "경고", JOptionPane.INFORMATION_MESSAGE);
-            System.exit(0);
-        }
+        return failcount;
     }
 }
 
