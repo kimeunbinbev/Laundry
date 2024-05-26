@@ -3,11 +3,14 @@ package deu.cse.laundry;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 
-public class DryerManagement extends javax.swing.JFrame {
-    private boolean[] faultStatus = {false, false, false}; // 각 건조기의 고장 상태를 나타내는 배열
+public class DryerManagement extends javax.swing.JFrame implements Observer {
+    private DryerStatus dryerStatus;
 
     
     public DryerManagement() {
+        dryerStatus = new DryerStatus();
+        dryerStatus.addObserver(this);
+        
         initComponents();
    
     }
@@ -100,68 +103,30 @@ public class DryerManagement extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jRadioButton1.isSelected()) {
-            if (faultStatus[0]) {
-                // 이미 고장 문의가 들어간 경우
-                new AlreadyFaultyDialog(this).setVisible(true);
-            } else {
-                new FaultConfirmationDialog2(this, 1).setVisible(true);
-                faultStatus[0] = true; // 고장 문의가 들어갔음을 표시
-            }
+            reportFault(0);
         }
         if (jRadioButton2.isSelected()) {
-            if (faultStatus[1]) {
-                // 이미 고장 문의가 들어간 경우
-                new AlreadyFaultyDialog(this).setVisible(true);
-            } else {
-                new FaultConfirmationDialog2(this, 2).setVisible(true);
-                faultStatus[1] = true; // 고장 문의가 들어갔음을 표시
-            }
+            reportFault(1);
         }
         if (jRadioButton3.isSelected()) {
-            if (faultStatus[2]) {
-                // 이미 고장 문의가 들어간 경우
-                new AlreadyFaultyDialog(this).setVisible(true);
-            } else {
-                new FaultConfirmationDialog2(this, 3).setVisible(true);
-                faultStatus[2] = true; // 고장 문의가 들어갔음을 표시
-            }
+            reportFault(2);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // A/S 완료 버튼이 눌렸을 때 모든 세탁기의 고장 상태를 초기화하고 다시 사용 가능하도록 설정합니다.
-        for (int i = 0; i < faultStatus.length; i++) {
-            faultStatus[i] = false;
-        }
-    
-        // 모든 라디오 버튼을 선택 해제합니다.
-        jRadioButton1.setSelected(false);
-        jRadioButton2.setSelected(false);
-        jRadioButton3.setSelected(false);
-    
-        // A/S 완료 다이얼로그를 띄웁니다.
-        new ASCompleteDialog(this).setVisible(true);
+        dryerStatus.completeAS();
     }//GEN-LAST:event_jButton3ActionPerformed
     public void reportFault(int machineIndex) {
-        if (faultStatus[machineIndex]) {
+        if (dryerStatus.isFaulty(machineIndex)) {
             new AlreadyFaultyDialog(this).setVisible(true);
         } else {
-            new FaultConfirmationDialog(this, machineIndex + 1).setVisible(true);
-            faultStatus[machineIndex] = true;
+            dryerStatus.reportFault(machineIndex);
         }
     }
 
     public void completeAS() {
-        for (int i = 0; i < faultStatus.length; i++) {
-            faultStatus[i] = false;
+        dryerStatus.completeAS();
         }
-
-        jRadioButton1.setSelected(false);
-        jRadioButton2.setSelected(false);
-        jRadioButton3.setSelected(false);
-
-        new ASCompleteDialog(this).setVisible(true);
-    }
 
     public static void main(String args[]) {
        java.awt.EventQueue.invokeLater(() -> new WashingMachineManagement().setVisible(true));
@@ -174,4 +139,17 @@ public class DryerManagement extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(int machineIndex, boolean status) {
+        if (status) {
+            new FaultConfirmationDialog2(this, machineIndex + 1).setVisible(true);
+        } else {
+            jRadioButton1.setSelected(false);
+            jRadioButton2.setSelected(false);
+            jRadioButton3.setSelected(false);
+            new ASCompleteDialog(this).setVisible(true);
+        }
+    }
 }
+
